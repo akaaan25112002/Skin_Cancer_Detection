@@ -1,0 +1,41 @@
+# ====== DATASETS ======
+Data/
+data/
+*.csv
+*.xlsx
+*.zip
+*.rar
+
+# ====== IMAGES ======
+*.jpg
+*.jpeg
+*.png
+*.bmp
+
+# ====== MODEL FILES ======
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.pkl
+*.npz
+
+# ====== PYTHON CACHE ======
+__pycache__/
+*.pyc
+
+# ====== JUPYTER ======
+.ipynb_checkpoints/
+
+# ====== ENVIRONMENTS ======
+env/
+.venv/
+venv/
+ENV/
+
+# ====== LOGS ======
+*.log
+
+# ====== SYSTEM FILES ======
+.DS_Store
+Thumbs.db
