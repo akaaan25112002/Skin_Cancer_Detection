@@ -1,0 +1,25 @@
+# Core
+numpy
+pandas
+matplotlib
+seaborn
+
+# Image processing
+scikit-image
+Pillow
+
+# Machine Learning
+scikit-learn
+imblearn
+
+# Deep Learning (EfficientNet-B2)
+torch
+torchvision
+timm
+
+# App UI
+streamlit
+
+# API
+fastapi
+uvicorn
