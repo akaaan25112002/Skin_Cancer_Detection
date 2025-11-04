@@ -15,9 +15,7 @@ data/
 # ====== MODEL FILES ======
 *.h5
 *.hdf5
-*.pt
 *.pth
-*.pkl
 *.npz
 
 # ====== PYTHON CACHE ======
