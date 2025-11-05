@@ -2,15 +2,31 @@ import torch
 import torch.nn as nn
 from torchvision import models, transforms
 from PIL import Image
+from huggingface_hub import hf_hub_download
 
+# ==========================
+# CONFIG
+# ==========================
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Load ckpt
-ckpt = torch.load("models/effb2_multi_best_stage2.pth", map_location=device)
+REPO_ID = "akaaan2511/skin_cancer_detection"
+FILENAME = "models/effb2_multi_best_stage2.pth"
+
+# ==========================
+# LOAD CHECKPOINT FROM HF
+# ==========================
+ckpt_path = hf_hub_download(
+    repo_id=REPO_ID,
+    filename=FILENAME
+)
+
+ckpt = torch.load(ckpt_path, map_location=device)
 CLASS_ORDER = ckpt["classes"]
 num_classes = len(CLASS_ORDER)
 
-# === build model EXACTLY like training ===
+# ==========================
+# BUILD MODEL (same as training)
+# ==========================
 base = models.efficientnet_b2(weights=None)
 
 in_feats = base.classifier[1].in_features

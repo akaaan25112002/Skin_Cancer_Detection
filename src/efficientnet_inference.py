@@ -3,6 +3,7 @@ import torch.nn as nn
 from torchvision import transforms
 from PIL import Image
 import timm
+from huggingface_hub import hf_hub_download
 
 # ==========================
 # CONFIG
@@ -10,16 +11,31 @@ import timm
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Best threshold from notebook
-BEST_THRESHOLD = 0.5299999999999998
+BEST_THRESHOLD = 0.53   # bạn có thể chỉnh theo notebook
+
+# HF Repo
+REPO_ID = "akaaan2511/skin_cancer_detection"
+FILENAME = "models/best_efficientnet_b2.pt"
+
 # ==========================
 # LOAD MODEL
 # ==========================
 num_classes = 2
 
+# build architecture
 model = timm.create_model("efficientnet_b2", pretrained=False)
 model.classifier = nn.Linear(model.classifier.in_features, num_classes)
 
-model.load_state_dict(torch.load("models/best_efficientnet_b2.pt", map_location=device))
+# Download weights from HF
+weight_path = hf_hub_download(
+    repo_id=REPO_ID,
+    filename=FILENAME
+)
+
+# Load state dict
+state = torch.load(weight_path, map_location=device)
+model.load_state_dict(state)
+
 model.to(device)
 model.eval()
 

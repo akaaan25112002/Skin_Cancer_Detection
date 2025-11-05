@@ -23,3 +23,5 @@ streamlit
 # API
 fastapi
 uvicorn
+
+huggingface_hub

@@ -1,14 +1,22 @@
 import joblib
-import numpy as np
+from huggingface_hub import hf_hub_download
 from skimage.feature import hog
 from skimage.color import rgb2gray
 from skimage.transform import resize
 from PIL import Image
+import numpy as np
 
-# Load model + scaler + label encoder
-multi_svm_model = joblib.load("models/multi_svm_model.pkl")
-multi_scaler    = joblib.load("models/multi_scaler.pkl")
-label_encoder   = joblib.load("models/multi_label_encoder.pkl")
+REPO_ID = "akaaan2511/skin_cancer_detection"
+
+# download
+svm_path = hf_hub_download(repo_id=REPO_ID, filename="models/multi_svm_model.pkl")
+scaler_path = hf_hub_download(repo_id=REPO_ID, filename="models/multi_scaler.pkl")
+encoder_path = hf_hub_download(repo_id=REPO_ID, filename="models/multi_label_encoder.pkl")
+
+# load
+multi_svm_model = joblib.load(svm_path)
+multi_scaler = joblib.load(scaler_path)
+label_encoder = joblib.load(encoder_path)
 
 # HOG extractor
 def extract_hog_single(image, target_size=(128,128)):
